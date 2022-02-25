@@ -141,7 +141,9 @@ router.route('/movies')
             var o = getJSONObjectForMovieRequirement(req);
             res.json(o);
         }
-    )
+    );
+
+router.route('/movies')
     .delete(authJwtController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
