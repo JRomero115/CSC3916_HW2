@@ -130,10 +130,10 @@ router.route('/movies')
             res.json(o);
         }
     )
-    .delete(authController.isAuthenticated, function(req, res) {
+    .put(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
-            res.json ({status: 200, msg: 'movie deleted'});
+            res.json ({status: 200, msg: 'movie updated'});
             if (req.get('Content-Type')) {
                 res = res.type(req.get('Content-Type'));
             }
@@ -141,10 +141,10 @@ router.route('/movies')
             res.json(o);
         }
     )
-    .put(authJwtController.isAuthenticated, function(req, res) {
+    .delete(authJwtController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
-            res.json ({status: 200, msg: 'movie updated'});
+            res.json ({status: 200, msg: 'movie deleted'});
             if (req.get('Content-Type')) {
                 res = res.type(req.get('Content-Type'));
             }
