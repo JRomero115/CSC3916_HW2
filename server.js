@@ -108,7 +108,7 @@ router.patch('/signin', function (req, res) {
 
 // Movies
 router.route('/movies')
-    .get('/movies', function (req, res) {
+    .get(function(req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'GET movies'});
@@ -119,7 +119,7 @@ router.route('/movies')
             res.json(o);
         }
     )
-    .post('/movies', function (req, res) {
+    .post(function(req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'movie saved'});
