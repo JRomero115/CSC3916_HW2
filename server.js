@@ -74,24 +74,28 @@ router.post('/signin', function (req, res) {
 
 // Movies
 router.route('/movies')
+    .get(authController.isAuthenticated, function(req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            res.json ({status: 200, msg: 'GET movies'});
+        }
+    )
+    .post(authController.isAuthenticated, function(req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            res.json ({status: 200, msg: 'movie saved'});
+        }
+    )
     .delete(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.json(o);
+            res.json ({status: 200, msg: 'movie deleted'});
         }
     )
     .put(authJwtController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.json(o);
+            res.json ({status: 200, msg: 'GET movies'});
         }
     );
 
