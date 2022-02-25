@@ -55,6 +55,23 @@ router.post('/signup', function(req, res) {
     }
 });
 
+// Return errors for other methods
+router.get('/signup', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
+router.put('/signup', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
+router.delete('/signup', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
+router.patch('/signup', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
 router.post('/signin', function (req, res) {
     var user = db.findOne(req.body.username);
 
@@ -72,32 +89,67 @@ router.post('/signin', function (req, res) {
     }
 });
 
+// Return errors for other methods
+router.get('/signin', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
+router.put('/signin', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
+router.delete('/signin', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
+router.patch('/signin', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
+
 // Movies
 router.route('/movies')
-    /*
     .get(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'GET movies'});
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            var o = getJSONObjectForMovieRequirement(req);
+            res.json(o);
         }
     )
     .post(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'movie saved'});
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            var o = getJSONObjectForMovieRequirement(req);
+            res.json(o);
         }
     )
-     */
     .delete(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'movie deleted'});
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            var o = getJSONObjectForMovieRequirement(req);
+            res.json(o);
         }
     )
     .put(authJwtController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'movie updated'});
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            var o = getJSONObjectForMovieRequirement(req);
+            res.json(o);
         }
     );
 
