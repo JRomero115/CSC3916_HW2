@@ -72,6 +72,7 @@ router.patch('/signup', function (req, res) {
     res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
 });
 
+
 router.post('/signin', function (req, res) {
     var user = db.findOne(req.body.username);
 
@@ -107,29 +108,29 @@ router.patch('/signin', function (req, res) {
 });
 
 // Movies
+router.get('/movies', function (req, res) {
+    console.log(req.body);
+    res = res.status(200);
+    res.json ({status: 200, msg: 'GET movies'});
+    if (req.get('Content-Type')) {
+        res = res.type(req.get('Content-Type'));
+    }
+    var o = getJSONObjectForMovieRequirement(req);
+    res.json(o);
+});
+
+router.post('/movies', function (req, res) {
+    console.log(req.body);
+    res = res.status(200);
+    res.json ({status: 200, msg: 'movie saved'});
+    if (req.get('Content-Type')) {
+        res = res.type(req.get('Content-Type'));
+    }
+    var o = getJSONObjectForMovieRequirement(req);
+    res.json(o);
+});
+
 router.route('/movies')
-    .get(function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            res.json ({status: 200, msg: 'GET movies'});
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.json(o);
-        }
-    )
-    .post(function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            res.json ({status: 200, msg: 'movie saved'});
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.json(o);
-        }
-    )
     .put(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
