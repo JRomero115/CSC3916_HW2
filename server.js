@@ -95,7 +95,7 @@ router.route('/movies')
     .put(authJwtController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
-            res.json ({status: 200, msg: 'GET movies'});
+            res.json ({status: 200, msg: 'movie updated'});
         }
     );
 
