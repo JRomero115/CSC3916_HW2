@@ -108,7 +108,7 @@ router.patch('/signin', function (req, res) {
 
 // Movies
 router.route('/movies')
-    .get(authController.isAuthenticated, function(req, res) {
+    .get('/movies', function (req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'GET movies'});
@@ -119,7 +119,7 @@ router.route('/movies')
             res.json(o);
         }
     )
-    .post(authController.isAuthenticated, function(req, res) {
+    .post('/movies', function (req, res) {
             console.log(req.body);
             res = res.status(200);
             res.json ({status: 200, msg: 'movie saved'});
@@ -152,6 +152,10 @@ router.route('/movies')
             res.json(o);
         }
     );
+
+router.patch('/movies', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
