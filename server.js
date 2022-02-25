@@ -74,6 +74,7 @@ router.post('/signin', function (req, res) {
 
 // Movies
 router.route('/movies')
+    /*
     .get(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
@@ -86,6 +87,7 @@ router.route('/movies')
             res.json ({status: 200, msg: 'movie saved'});
         }
     )
+     */
     .delete(authController.isAuthenticated, function(req, res) {
             console.log(req.body);
             res = res.status(200);
