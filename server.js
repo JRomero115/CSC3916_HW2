@@ -108,6 +108,25 @@ router.patch('/signin', function (req, res) {
 });
 
 // Movies
+router.route('/movies')
+    .get(function(req, res){
+        var jsonObj = getJSONObjectForMovieRequirement(req);
+        res.json({status: 200, message: "GET movies", headers: jsonObj.headers, query: req.query, env: jsonObj.key});
+
+    })
+    .post(function(req, res){
+        var jsonObj = getJSONObjectForMovieRequirement(req);
+        res.json({status: 200, message: "movie saved", headers: jsonObj.headers, query: req.query, env: jsonObj.key});
+    })
+    .put(authJwtController.isAuthenticated, function(req, res) {
+        var jsonObj = getJSONObjectForMovieRequirement(req);
+        res.json({status: 200, message: "movie updated", headers: jsonObj.headers, query: req.query, env: jsonObj.key});
+    })
+    .delete(authController.isAuthenticated, function(req, res){
+        var jsonObj = getJSONObjectForMovieRequirement(req);
+        res.json({status: 200, message: "movie deleted", headers: jsonObj.headers, query: req.query, env: jsonObj.key});
+    });
+/*
 router.get('/movies', function (req, res) {
     console.log(req.body);
     res = res.status(200);
@@ -159,6 +178,9 @@ router.route('/movies')
 router.patch('/movies', function (req, res) {
     res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
 });
+
+ */
+
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
