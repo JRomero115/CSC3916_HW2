@@ -110,6 +110,26 @@ router.patch('/signin', function (req, res) {
 
 // Movies
 router.route('/movies')
+    .delete(authJwtController.isAuthenticated, function(req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            var o = getJSONObjectForMovieRequirement(req);
+            res.status(200).send({status: 200, msg: 'movie deleted', headers: o.headers, query: req.query, env: o.key});
+        }
+    )
+    .put(authController.isAuthenticated, function(req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            var o = getJSONObjectForMovieRequirement(req);
+            res.status(200).send({status: 200, msg: 'movie updated', headers: o.headers, query: req.query, env: o.key});
+        }
+    )
     .get(function (req, res) {
             console.log(req.body);
             res = res.status(200);
@@ -130,26 +150,6 @@ router.route('/movies')
             }
             var o = getJSONObjectForMovieRequirement(req);
             res.status(200).send({status: 200, msg: 'movie saved', headers: o.headers, query: req.query, env: o.key});
-        }
-    )
-    .put(authController.isAuthenticated, function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.status(200).send({status: 200, msg: 'movie updated', headers: o.headers, query: req.query, env: o.key});
-        }
-    )
-    .delete(authJwtController.isAuthenticated, function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.status(200).send({status: 200, msg: 'movie deleted', headers: o.headers, query: req.query, env: o.key});
         }
     );
 
