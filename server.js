@@ -117,7 +117,7 @@ router.route('/movies')
                 res = res.type(req.get('Content-Type'));
             }
             var o = getJSONObjectForMovieRequirement(req);
-        res.send({status: res, msg: 'GET movies', headers: o.headers, query: req.query, env: o.key});
+            res.json(o);
         }
     )
     .post(function (req, res) {
@@ -128,7 +128,7 @@ router.route('/movies')
                 res = res.type(req.get('Content-Type'));
             }
             var o = getJSONObjectForMovieRequirement(req);
-            res.send({status: res, msg: 'movie saved', headers: o.headers, query: req.query, env: o.key});
+            res.json(o);
         }
     )
     .put(authController.isAuthenticated, function(req, res) {
@@ -138,7 +138,7 @@ router.route('/movies')
                 res = res.type(req.get('Content-Type'));
             }
             var o = getJSONObjectForMovieRequirement(req);
-            res.send({status: res, msg: 'movie updated', headers: o.headers, query: req.query, env: o.key});
+            res.json(o);
         }
     )
     .delete(authJwtController.isAuthenticated, function(req, res) {
@@ -148,7 +148,7 @@ router.route('/movies')
                 res = res.type(req.get('Content-Type'));
             }
             var o = getJSONObjectForMovieRequirement(req);
-            res.send({status: res, msg: 'movie deleted', headers: o.headers, query: req.query, env: o.key});
+            res.json(o);
         }
     );
 /*
