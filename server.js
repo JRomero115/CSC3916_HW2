@@ -110,26 +110,6 @@ router.patch('/signin', function (req, res) {
 
 // Movies
 router.route('/movies')
-    .delete(authJwtController.isAuthenticated, function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.status(200).send({status: 200, msg: 'movie deleted', headers: o.headers, query: req.query, env: o.key});
-        }
-    )
-    .put(authController.isAuthenticated, function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.status(200).send({status: 200, msg: 'movie updated', headers: o.headers, query: req.query, env: o.key});
-        }
-    )
     .get(function (req, res) {
             console.log(req.body);
             res = res.status(200);
@@ -151,7 +131,31 @@ router.route('/movies')
             var o = getJSONObjectForMovieRequirement(req);
             res.status(200).send({status: 200, msg: 'movie saved', headers: o.headers, query: req.query, env: o.key});
         }
+    )
+    .put(authController.isAuthenticated, function(req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            var o = getJSONObjectForMovieRequirement(req);
+            res.status(200).send({status: 200, msg: 'movie updated', headers: o.headers, query: req.query, env: o.key});
+        }
     );
+
+router.delete('/movies', function (req, res) {
+    console.log(req.body);
+    res = res.status(200);
+    if (req.get('Content-Type')) {
+        res = res.type(req.get('Content-Type'));
+    }
+    var o = getJSONObjectForMovieRequirement(req);
+    res.status(200).send({status: 200, msg: 'movie deleted', headers: o.headers, query: req.query, env: o.key});
+});
+
+router.patch('/movies', function (req, res) {
+    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
+});
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
