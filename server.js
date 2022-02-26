@@ -41,6 +41,7 @@ function getJSONObjectForMovieRequirement(req) {
     return json;
 }
 
+// Sign-up
 router.post('/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
         res.json({success: false, msg: 'Please include both username and password to signup.'})
@@ -72,7 +73,7 @@ router.patch('/signup', function (req, res) {
     res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
 });
 
-
+// Sign-in
 router.post('/signin', function (req, res) {
     var user = db.findOne(req.body.username);
 
@@ -151,61 +152,6 @@ router.route('/movies')
             res.status(200).send({status: 200, msg: 'movie deleted', headers: o.headers, query: req.query, env: o.key});
         }
     );
-/*
-router.get('/movies', function (req, res) {
-    console.log(req.body);
-    res = res.status(200);
-    res.json ({status: 200, msg: 'GET movies'});
-    if (req.get('Content-Type')) {
-        res = res.type(req.get('Content-Type'));
-    }
-    var o = getJSONObjectForMovieRequirement(req);
-    res.json(o);
-});
-
-router.post('/movies', function (req, res) {
-    console.log(req.body);
-    res = res.status(200);
-    res.json ({status: 200, msg: 'movie saved'});
-    if (req.get('Content-Type')) {
-        res = res.type(req.get('Content-Type'));
-    }
-    var o = getJSONObjectForMovieRequirement(req);
-    res.json(o);
-});
-
-router.route('/movies')
-    .put(authController.isAuthenticated, function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            res.json ({status: 200, msg: 'movie updated'});
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.json(o);
-        }
-    );
-
-router.route('/movies')
-    .delete(authJwtController.isAuthenticated, function(req, res) {
-            console.log(req.body);
-            res = res.status(200);
-            res.json ({status: 200, msg: 'movie deleted'});
-            if (req.get('Content-Type')) {
-                res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObjectForMovieRequirement(req);
-            res.json(o);
-        }
-    );
-
-router.patch('/movies', function (req, res) {
-    res.status(401).send({success: false, msg: 'Does not support the HTTP method.'});
-});
-
- */
-
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
